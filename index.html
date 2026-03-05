@@ -3,272 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dan zaljubljenih L+K ❤️</title>
+    <title>Naša Nedelja | Kristina & Luka 🌿</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap');
-
-        * {
-            box-sizing: border-box;
+        :root {
+            --bg-body: #f4eae4; /* Topla pozadina van kartice (za desktop) */
+            --bg-card: #fcfbf9; /* Skroz svetla, kremasta pozadina ekrana */
+            --text-main: #5c4a44; /* Topla, duboka sivo-braon za čitanje */
+            --text-heading: #8c5e58; /* Romantična prljavo-roze/braon za naslove */
+            --accent: #d4a397; /* Svetlija roze-breskva za detalje */
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --font-signature: 'Dancing Script', cursive;
         }
 
         body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-body);
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #fff0f3 0%, #ffdde1 100%);
-            font-family: 'Poppins', sans-serif;
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden; /* Prvo nema skrolovanja */
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Na mobilnom kreće od vrha */
+            min-height: 100vh;
+        }
+
+        .adventure-container {
+            background: var(--bg-card);
+            max-width: 450px; /* Idealna širina za simulaciju telefona */
+            width: 100%;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at top, #fff, #fdfbf7);
+            box-shadow: 0 10px 40px rgba(92, 74, 68, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Glavna slika na vrhu (Hero) */
+        .hero-image {
+            width: 100%;
+            height: 40vh; /* Zauzima 40% ekrana telefona */
+            min-height: 300px;
+            background-image: url('https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=600&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 40px;
+            box-sizing: border-box;
+        }
+
+        /* Gradient preko slike da tekst bude čitljiv */
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(92, 74, 68, 0.7) 100%);
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: 36px;
+            font-weight: 600;
+            color: #ffffff;
+            text-align: center;
+            line-height: 1.2;
+            position: relative;
+            z-index: 2;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-subtitle {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-style: italic;
+            font-weight: 300;
+            margin-top: 8px;
+            color: #f4eae4;
+            letter-spacing: 1px;
+        }
+
+        /* Sadržaj */
+        .content-body {
+            padding: 35px 25px;
+            position: relative;
+            z-index: 3;
+            background: var(--bg-card);
+            border-radius: 30px 30px 0 0;
+            margin-top: -30px; /* Pravi lep "preklop" preko slike */
+        }
+
+        .intro-text {
+            font-size: 15px;
+            line-height: 1.7;
+            font-weight: 400;
+            color: var(--text-main);
+            margin-bottom: 40px;
             text-align: center;
         }
 
-        /* Kontejner za srca u pozadini */
-        #bg-hearts-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Glavni omotač */
-        .main-wrapper {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow-y: auto; /* Dozvoljava skrol unutar ovoga */
-            -webkit-overflow-scrolling: touch;
-        }
-
-        h1 {
-            font-family: 'Pacifico', cursive;
-            color: #ff4b4b;
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            line-height: 1.3;
-            padding: 0 15px;
-        }
-
-        /* Pitanje */
-        #question-box {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px 20px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(255, 75, 75, 0.15);
-            border: 2px solid #fff;
-            width: 90%;
-            max-width: 500px;
-            margin: auto;
-            transition: opacity 0.5s ease;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        button {
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            -webkit-tap-highlight-color: transparent; /* Uklanja plavi okvir na klik */
-        }
-
-        .btn-yes {
-            background-color: #ff4b4b;
-            color: white;
-            box-shadow: 0 5px 15px rgba(255, 75, 75, 0.4);
-        }
-
-        .btn-yes:hover, .btn-yes:active {
-            transform: scale(1.05);
-            background-color: #ff2e2e;
-        }
-
-        .btn-no {
-            background-color: #e0e0e0;
-            color: #555;
-            position: relative;
-            z-index: 100;
-        }
-
-        /* Proslava (skriveno) */
-        #celebration {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 800px;
-            padding: 20px;
-            margin-top: 20px;
-            padding-bottom: 50px; /* Prostor za skrol na dnu */
-        }
-
-        .celebration-card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            width: 95%;
-        }
-
-        .heart-beat {
-            font-size: 4rem;
-            color: #ff4b4b;
-            animation: beat 1s infinite alternate;
+        .intro-text span {
+            font-family: var(--font-heading);
+            font-size: 26px;
+            color: var(--text-heading);
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
 
-        .destination {
-            font-size: 1.4rem;
-            color: #333;
-            margin-bottom: 25px;
-            font-weight: bold;
-        }
-
-        /* Galerija */
-        .bled-gallery {
+        /* Kartice plana sa slikama - PRILAGOĐENO ZA MOBILNI */
+        .plan-card {
             display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
+            flex-direction: column; /* Slika gore, tekst dole */
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(92, 74, 68, 0.06);
+            border: 1px solid rgba(212, 163, 151, 0.15);
         }
 
-        .bled-image {
+        .card-img {
             width: 100%;
-            max-width: 250px; /* Slike nisu prevelike */
-            height: 180px;
-            object-fit: cover;
-            border-radius: 15px;
-            border: 4px solid white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            background-color: #eee; /* Siva boja dok se ne učita */
+            height: 160px; /* Lepa, široka slika */
+            background-size: cover;
+            background-position: center;
         }
 
-        .emojis {
-            font-size: 2rem;
-            margin-top: 15px;
-            letter-spacing: 5px;
+        .card-info {
+            padding: 20px;
+            text-align: center;
         }
 
-        @keyframes beat { to { transform: scale(1.2); } }
-        
-        /* Srce animacija */
-        .bg-heart {
-            position: absolute;
-            color: rgba(255, 75, 75, 0.25);
-            animation: fall linear forwards; /* Forwards da ne nestane naglo */
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-heading);
+            margin: 0 0 8px 0;
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        .card-desc {
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.6;
+            font-weight: 400;
         }
 
+        /* Finalna poruka i potpis */
+        .final-note {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid var(--accent);
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .love-text {
+            font-family: var(--font-body);
+            font-size: 15px;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+
+        .signature {
+            font-family: var(--font-signature);
+            font-size: 38px; /* Lep rukopisni font */
+            color: var(--text-heading);
+            margin: 0;
+            line-height: 1;
+        }
+
+        /* Pravila specifična za desktop ekrane */
+        @media (min-width: 500px) {
+            body {
+                align-items: center;
+                padding: 20px;
+            }
+            .adventure-container {
+                min-height: auto;
+                border-radius: 30px;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <div id="bg-hearts-container"></div>
-
-    <div class="main-wrapper" id="mainWrapper">
+    <div class="adventure-container">
         
-        <div id="question-box">
-            <h1>Kristina, da li želiš da provedemo dan zaljubljenih zajedno? 🌹</h1>
-            <div class="buttons">
-                <button class="btn-yes" onclick="showLove()">DA!</button>
-                <button class="btn-no" id="noBtn" onmouseenter="moveButton()" ontouchstart="moveButton()">Ne </button>
+        <div class="hero-image">
+            <div class="hero-title">
+                Naša Nedelja
+                <span class="hero-subtitle">Samo tvoj dan ✨</span>
             </div>
         </div>
+        
+        <div class="content-body">
+            <div class="intro-text">
+                <span>Kristina,</span>
+                Znam koliko voliš prirodu i da istražuješ. Zato sam za ovaj 8. mart isplanirao da put kući bude jedna lepa avantura. Tvoje je samo da se opustiš i uživaš, a moje da sve organizujem.
+            </div>
 
-        <div id="celebration">
-            <div class="celebration-card">
-                <span class="heart-beat">❤️</span>
-                <h1>Jeeej! ❤️❤️❤️</h1>
-                <p class="destination">Pakuj se, vodim te na Bled! 🏔️✨</p>
-
-                <div class="bled-gallery">
-                    <img class="bled-image" src="https://www.novostiplus.org/wp-content/uploads/2025/11/slo-jasna-resort-1-960x1200-1.webp" alt="Bled">
-                    
-                    <img class="bled-image" src="https://zgexpress.net/wp-content/uploads/2025/01/Bled-foto-Sava-hotels.jpg" alt="Bled">
-                    
-                    <img class="bled-image" src="https://fajlovi.bos4.tours/uploads/places/bled1-162616609960ed535375f7b6.97742372.jpg" alt="Bled">
+            <div class="plan-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=500&auto=format&fit=crop');"></div>
+                <div class="card-info">
+                    <p class="card-title">Jutro</p>
+                    <p class="card-desc">Budimo se lagano. Kafa i doručak u Somboru, bez žurbe, pa lagano krećemo.</p>
                 </div>
-
-                <div class="emojis">😍😍🥰🍫🚗💨🏔️</div>
             </div>
+
+            <div class="plan-card">
+                <div class="card-img" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXgJNyT7EqcILoO136qxpDyH23sXoGAh7FBw&s');"></div>
+                <div class="card-info">
+                    <p class="card-title">Tvrđava</p>
+                    <p class="card-desc">Tvrđava Bač, malo istorije i šetnje kroz stare zidine.</p>
+                </div>
+            </div>
+            
+            <div class="plan-card">
+                <div class="card-img" style="background-image: url('https://d2exd72xrrp1s7.cloudfront.net/www/000/1k4/1x/1xciceuiwc5ip1ve3kn7ge56153coy6q12-uhi12151902/0?width=768&height=576&crop=true');"></div>
+                <div class="card-info">
+                    <p class="card-title">Fruška gora</p>
+                    <p class="card-desc">Beli Majdan, istraživanje skrivene dvorane u prirodi.</p>
+                </div>
+            </div>
+
+            <div class="plan-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=500&auto=format&fit=crop');"></div>
+                <div class="card-info">
+                    <p class="card-title">Uživanje</p>
+                    <p class="card-desc">Dobra hrana sa lepim pogledom i povratak kući.</p>
+                </div>
+            </div>
+
+            <div class="final-note">
+                <p class="love-text">Zato što si ti najbolja devojka na svetu. ❤️</p>
+                <p class="signature">Voli te tvoj Luka</p>
+            </div>
+
         </div>
-
     </div>
-
-    <script>
-        function moveButton(e) {
-            if(e && e.type === 'touchstart') e.preventDefault(); // Spreči klik na dodir
-            
-            const noBtn = document.getElementById('noBtn');
-            const maxWidth = window.innerWidth - noBtn.offsetWidth - 20;
-            const maxHeight = window.innerHeight - noBtn.offsetHeight - 20;
-
-            const randomX = Math.max(10, Math.random() * maxWidth);
-            const randomY = Math.max(10, Math.random() * maxHeight);
-
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
-        }
-
-        function showLove() {
-            // Sakrij pitanje
-            document.getElementById('question-box').style.display = 'none';
-            document.getElementById('noBtn').style.display = 'none';
-            
-            // Prikaži odgovor
-            const celebration = document.getElementById('celebration');
-            celebration.style.display = 'flex';
-            
-            // Sredi skrol
-            document.body.style.overflow = 'auto'; // Omogući skrol na body
-            
-            // Pokreni srca
-            setInterval(createHeart, 300);
-            for(let i=0; i<15; i++) createHeart();
-        }
-
-        function createHeart() {
-            const container = document.getElementById('bg-hearts-container');
-            if(container.children.length > 40) return; // Limit
-
-            const heart = document.createElement('div');
-            heart.classList.add('bg-heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
-            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
-            
-            container.appendChild(heart);
-            
-            setTimeout(() => { heart.remove(); }, 6000);
-        }
-    </script>
 </body>
 </html>
